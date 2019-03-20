@@ -1,0 +1,16 @@
+**********************
+Method_1: SRFBN; Set: Set5
+x2 1 baby_SRFBN_x2.png: PSNR= 38.948027 SSIM= 0.967994
+x2 2 bird_SRFBN_x2.png: PSNR= 43.378302 SSIM= 0.990655
+x2 3 butterfly_SRFBN_x2.png: PSNR= 35.661460 SSIM= 0.979083
+x2 4 head_SRFBN_x2.png: PSNR= 36.035783 SSIM= 0.891475
+x2 5 woman_SRFBN_x2.png: PSNR= 36.541073 SSIM= 0.975070
+--------Mean--------
+x2: PSNR= 38.112929 SSIM= 0.960855
+x3 1 baby_SRFBN_x3.png: PSNR= 35.736785 SSIM= 0.930411
+x3 2 bird_SRFBN_x3.png: PSNR= 38.634528 SSIM= 0.974225
+x3 3 butterfly_SRFBN_x3.png: PSNR= 31.725275 SSIM= 0.955115
+x3 4 head_SRFBN_x3.png: PSNR= 34.174100 SSIM= 0.837531
+x3 5 woman_SRFBN_x3.png: PSNR= 33.243032 SSIM= 0.948843
+--------Mean--------
+x3: PSNR= 34.702744 SSIM= 0.929225

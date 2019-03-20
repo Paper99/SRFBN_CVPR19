@@ -1,0 +1,12 @@
+.idea/
+__pycache__/
+
+*.sln
+*.suo
+*.pyproj
+*.pyc
+*.sh
+*.pth
+
+experiments/
+

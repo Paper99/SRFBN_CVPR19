@@ -1,0 +1,61 @@
+{
+    "mode": "sr",
+    "use_cl": false,
+    "gpu_ids": [0],
+
+    "scale": 4,
+    "is_train": true,
+    "use_chop": true,
+    "rgb_range": 255,
+    "self_ensemble": false,
+    "save_image": false,
+
+    "datasets": {
+        "train": {
+            "mode": "LRHR",
+            "dataroot_HR": "/mnt/data/paper99/DF2K/HR/x4",
+            "dataroot_LR": "/mnt/data/paper99/DF2K/LR/x4",
+            "data_type": "npy",
+            "n_workers": 4,
+            "batch_size": 16,
+            "LR_size": 48,
+            "use_flip": true,
+            "use_rot": true,
+            "noise": "."
+        },
+        "val": {
+            "mode": "LRHR",
+            "dataroot_HR": "./results/HR/Set5/x4",
+            "dataroot_LR": "./results/LR/LRBI/Set5/x4",
+            "data_type": "img"
+        }
+    },
+
+    "networks": {
+        "which_model": "EDSR",
+        "num_features": 256,
+        "in_channels": 3,
+        "out_channels": 3,
+        "num_blocks": 32,
+        "res_scale": 0.1
+    },
+
+    "solver": {
+        "type": "ADAM",
+        "learning_rate": 0.0001,
+        "weight_decay": 0,
+        "lr_scheme": "MultiStepLR",
+        "lr_steps": [200, 400, 600, 800],
+        "lr_gamma": 0.5,
+        "loss_type": "l1",
+        "manual_seed": 0,
+        "num_epochs": 1000,
+        "skip_threshold": 3,
+        "split_batch": 2,
+        "save_ckp_step": 50,
+        "save_vis_step": 1,
+        "pretrain": null,
+        "pretrained_path": "./experiments/EDSR_in3f256_x4/epochs/last_ckp.pth",
+        "cl_weights": [1.0, 1.0, 1.0, 1.0]
+    }
+}
