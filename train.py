@@ -68,7 +68,7 @@ def main():
                 solver.feed_data(batch)
                 iter_loss = solver.train_step()
                 batch_size = batch['LR'].size(0)
-                train_loss_list.append(iter_loss.item()*batch_size)
+                train_loss_list.append(iter_loss*batch_size)
                 t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
                 t.update()
 
@@ -88,7 +88,7 @@ def main():
         for iter, batch in enumerate(val_loader):
             solver.feed_data(batch)
             iter_loss = solver.test()
-            val_loss_list.append(iter_loss.item())
+            val_loss_list.append(iter_loss)
 
             # calculate evaluation metrics
             visuals = solver.get_current_visual()

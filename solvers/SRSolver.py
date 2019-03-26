@@ -93,32 +93,35 @@ class SRSolver(BaseSolver):
         self.model.train()
         self.optimizer.zero_grad()
 
-        loss_pix = 0.0
+        loss_batch = 0.0
         sub_batch_size = int(self.LR.size(0) / self.split_batch)
         for i in range(self.split_batch):
+            loss_sbatch = 0.0
             split_LR = self.LR.narrow(0, i*sub_batch_size, sub_batch_size)
             split_HR = self.HR.narrow(0, i*sub_batch_size, sub_batch_size)
             if self.use_cl:
                 outputs = self.model(split_LR)
                 loss_steps = [self.criterion_pix(sr, split_HR) for sr in outputs]
                 for step in range(len(loss_steps)):
-                    loss_pix += self.cl_weights[step] * loss_steps[step]
+                    loss_sbatch += self.cl_weights[step] * loss_steps[step]
             else:
                 output = self.model(split_LR)
-                loss_pix += self.criterion_pix(output, split_HR)
+                loss_sbatch = self.criterion_pix(output, split_HR)
 
-        loss_pix /= self.split_batch
+            loss_sbatch /= self.split_batch
+            loss_sbatch.backward()
+
+            loss_batch += (loss_sbatch.item())
 
         # for stable training
-        if loss_pix < self.skip_threshold * self.last_epoch_loss:
-            loss_pix.backward()
+        if loss_batch < self.skip_threshold * self.last_epoch_loss:
             self.optimizer.step()
-            self.last_epoch_loss = loss_pix
+            self.last_epoch_loss = loss_batch
         else:
-            print('[Warning] Skip this batch! (Loss: {})'.format(loss_pix))
+            print('[Warning] Skip this batch! (Loss: {})'.format(loss_batch))
 
         self.model.eval()
-        return loss_pix
+        return loss_batch
 
 
     def test(self):
@@ -138,7 +141,7 @@ class SRSolver(BaseSolver):
         self.model.train()
         if self.is_train:
             loss_pix = self.criterion_pix(self.SR, self.HR)
-            return loss_pix
+            return loss_pix.item()
 
 
     def _forward_x8(self, x, forward_function):

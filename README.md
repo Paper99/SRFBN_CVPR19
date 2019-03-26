@@ -1,4 +1,4 @@
-# Feedback Network for Image Super-Resolution [arXiv] [CVF] [Poster]
+# Feedback Network for Image Super-Resolution [[arXiv]](https://arxiv.org/abs/1903.09814) [CVF] [Poster]
 
 This repository is Pytorch code for our proposed SRFBN.
 
@@ -6,7 +6,7 @@ The code is developed by [Paper99](https://github.com/Paper99) and [penguin1214]
 
 ![](figs/SRFBN_arch.jpg)
 
-The architecture of our proposed SRFBN. Blue arrows represent feedback connections. The details about our proposed SRFBN can be found in our main paper.
+The architecture of our proposed SRFBN. Blue arrows represent feedback connections. The details about our proposed SRFBN can be found in [our main paper](https://arxiv.org/abs/1903.09814).
 
 If you find our work useful in your research or publications, please consider citing:
 
@@ -149,6 +149,6 @@ Qualitative results with DN degradation model (x3) on “head” from Set14.
 
 ## Acknowledgements
 
-- Thanks [penguin1214](https://github.com/penguin1214), who accompanies me to develop this repository.
-- Thanks [Xintao](https://github.com/xinntao). Our code structure is derived from his repository [BasicSR](https://github.com/xinntao/BasicSR). 
-- Thanks authors of [BasicSR](https://github.com/xinntao/BasicSR)/[RDN](https://github.com/yulunzhang/RDN)/[EDSR](https://github.com/thstkdgus35/EDSR-PyTorch). They provide many useful codes which facilitate our work.
+- Thank [penguin1214](https://github.com/penguin1214), who accompanies me to develop this repository.
+- Thank [Xintao](https://github.com/xinntao). Our code structure is derived from his repository [BasicSR](https://github.com/xinntao/BasicSR). 
+- Thank authors of [BasicSR](https://github.com/xinntao/BasicSR)/[RDN](https://github.com/yulunzhang/RDN)/[EDSR](https://github.com/thstkdgus35/EDSR-PyTorch). They provide many useful codes which facilitate our work.
