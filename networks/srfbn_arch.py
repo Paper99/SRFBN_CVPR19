@@ -136,6 +136,7 @@ class SRFBN(nn.Module):
         self.block = FeedbackBlock(num_features, num_groups, upscale_factor, act_type, norm_type)
 
         # reconstruction block
+		# uncomment for pytorch 0.4.0
         # self.upsample = nn.Upsample(scale_factor=upscale_factor, mode='bilinear')
 
         self.out = DeconvBlock(num_features, num_features,
@@ -151,7 +152,10 @@ class SRFBN(nn.Module):
         self._reset_state()
 
         x = self.sub_mean(x)
+		# uncomment for pytorch 0.4.0
         # inter_res = self.upsample(x)
+		
+		# comment for pytorch 0.4.0
         inter_res = nn.functional.interpolate(x, scale_factor=self.upscale_factor, mode='bilinear', align_corners=False)
 
         x = self.conv_in(x)

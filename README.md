@@ -146,6 +146,7 @@ Qualitative results with DN degradation model (x3) on “head” from Set14.
 ## TODO
 
 - Curriculum learning for complex degradation models (i.e. BD and DN degradation models).
+- SRFBN-S pretrained models.
 
 ## Acknowledgements
 
