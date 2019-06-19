@@ -61,7 +61,7 @@ def get_image_paths(data_type, dataroot):
                     img_paths = sorted(_get_paths_from_images(old_dir))
                     path_bar = tqdm(img_paths)
                     for v in path_bar:
-                        img = misc.imread(v)
+                        img = misc.imread(v, mode='RGB')
                         ext = os.path.splitext(os.path.basename(v))[-1]
                         name_sep = os.path.basename(v.replace(ext, '.npy'))
                         np.save(os.path.join(dataroot, name_sep), img)
@@ -89,7 +89,7 @@ def read_img(path, data_type):
     # read image by misc or from .npy
     # return: Numpy float32, HWC, RGB, [0,255]
     if data_type == 'img':
-        img = misc.imread(path)
+        img = misc.imread(path, mode='RGB')
     elif data_type.find('npy') >= 0:
         img = np.load(path)
     else:
