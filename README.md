@@ -1,10 +1,10 @@
-# Feedback Network for Image Super-Resolution [[arXiv]](https://arxiv.org/abs/1903.09814) [CVF] [Poster]
+# Feedback Network for Image Super-Resolution [[arXiv]](https://arxiv.org/abs/1903.09814) [[CVF]](http://openaccess.thecvf.com/content_CVPR_2019/html/Li_Feedback_Network_for_Image_Super-Resolution_CVPR_2019_paper.html) [[Poster]](https://drive.google.com/open?id=1TcDk1RvUCIjr6KvQplaen8yq15LOBJwb)
 
 This repository is Pytorch code for our proposed SRFBN.
 
 The code is developed by [Paper99](https://github.com/Paper99) and [penguin1214](https://github.com/penguin1214) based on [BasicSR](https://github.com/xinntao/BasicSR), and tested on Ubuntu 16.04/18.04 environment (Python 3.6/3/7, PyTorch 0.4.0/1.0.0/1.0.1, CUDA 8.0/9.0/10.0) with 2080Ti/1080Ti GPUs.
 
-![](figs/SRFBN_arch.jpg)
+![](figs/SRFBN_arch.png)
 
 The architecture of our proposed SRFBN. Blue arrows represent feedback connections. The details about our proposed SRFBN can be found in [our main paper](https://arxiv.org/abs/1903.09814).
 
@@ -31,7 +31,7 @@ If you find our work useful in your research or publications, please consider ci
 2. [Test](#test)
 3. [Train](#train)
 4. [Results](#results)
-5. [Acknowlegements](#acknowledgements)
+5. [Acknowledgements](#acknowledgements)
 
 ## Requirements
 - Python 3 (Anaconda is recommended)
@@ -53,16 +53,27 @@ If you find our work useful in your research or publications, please consider ci
    git clone https://github.com/Paper99/SRFBN_CVPR19.git
    ```
 
-2. Download our pre-trained models from [GoogleDrive](https://drive.google.com/file/d/1Dsb_-OH0CeSJVjvP9A4bh2_IBQh9R-ja/view) or [BaiduYun](https://pan.baidu.com/s/1fIGBulcWll8MzaS87D_kPQ)(code:6qta), unzip the models and place them to `./models`.
+2. Download our pre-trained models from the links below, unzip the models and place them to `./models`.
+
+   |  Model  | Param. |                                                              |                                                              |
+   | :-----: | :----: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+   |  SRFBN  | 3,631K | [GoogleDrive](https://drive.google.com/file/d/1Dsb_-OH0CeSJVjvP9A4bh2_IBQh9R-ja/view) | [BaiduYun](https://pan.baidu.com/s/1fIGBulcWll8MzaS87D_kPQ)(code:6qta) |
+   | SRFBN-S |  483K  | [GoogleDrive](https://drive.google.com/file/d/1NYIS0zPrpSO5fv1xpN1hH6qX4lBYxIW5/view?usp=sharing) |                        BaiduYun(TBA)                         |
 
 3. Then, cd to `SRFBN_CVPR19` and run **one of following commands** for evaluation on *Set5*:
 
    ```shell
+   # SRFBN
    python test.py -opt options/test/test_SRFBN_x2_BI.json
    python test.py -opt options/test/test_SRFBN_x3_BI.json
    python test.py -opt options/test/test_SRFBN_x4_BI.json
    python test.py -opt options/test/test_SRFBN_x3_BD.json
    python test.py -opt options/test/test_SRFBN_x3_DN.json
+   
+   # SRFBN-S
+   python test.py -opt options/test/test_SRFBN-S_x2_BI.json
+   python test.py -opt options/test/test_SRFBN-S_x3_BI.json
+   python test.py -opt options/test/test_SRFBN-S_x4_BI.json
    ```
 
 4. Finally, PSNR/SSIM values for *Set5* are shown on your screen, you can find the reconstruction images in `./results`.
@@ -146,7 +157,6 @@ Qualitative results with DN degradation model (x3) on “head” from Set14.
 ## TODO
 
 - Curriculum learning for complex degradation models (i.e. BD and DN degradation models).
-- SRFBN-S pretrained models.
 
 ## Acknowledgements
 
