@@ -253,6 +253,43 @@ class DensebackprojBlock(nn.Module):
         return output
 
 
+class ResidualDenseBlock_8C(nn.Module):
+    '''
+    Residual Dense Block
+    style: 5 convs
+    The core module of paper: (Residual Dense Network for Image Super-Resolution, CVPR 18)
+    '''
+
+    def __init__(self, nc, kernel_size=3, gc=32, stride=1, bias=True, pad_type='zero',norm_type=None, act_type='relu', mode='CNA'):
+        super(ResidualDenseBlock_8C, self).__init__()
+        # gc: growth channel, i.e. intermediate channels
+        self.conv1 = ConvBlock(nc, gc, kernel_size, stride, bias=bias, pad_type=pad_type, norm_type=norm_type, act_type=act_type, mode=mode)
+        self.conv2 = ConvBlock(nc+gc, gc, kernel_size, stride, bias=bias, pad_type=pad_type, norm_type=norm_type, act_type=act_type, mode=mode)
+        self.conv3 = ConvBlock(nc+2*gc, gc, kernel_size, stride, bias=bias, pad_type=pad_type, norm_type=norm_type, act_type=act_type, mode=mode)
+        self.conv4 = ConvBlock(nc+3*gc, gc, kernel_size, stride, bias=bias, pad_type=pad_type, norm_type=norm_type, act_type=act_type, mode=mode)
+        self.conv5 = ConvBlock(nc+4*gc, gc, kernel_size, stride, bias=bias, pad_type=pad_type, norm_type=norm_type, act_type=act_type, mode=mode)
+        self.conv6 = ConvBlock(nc+5*gc, gc, kernel_size, stride, bias=bias, pad_type=pad_type, norm_type=norm_type, act_type=act_type, mode=mode)
+        self.conv7 = ConvBlock(nc+6*gc, gc, kernel_size, stride, bias=bias, pad_type=pad_type, norm_type=norm_type, act_type=act_type, mode=mode)
+        self.conv8 = ConvBlock(nc+7*gc, gc, kernel_size, stride, bias=bias, pad_type=pad_type, norm_type=norm_type, act_type=act_type, mode=mode)
+        if mode == 'CNA':
+            last_act = None
+        else:
+            last_act = act_type
+        self.conv9 = ConvBlock(nc+8*gc, nc, 1, stride, bias=bias, pad_type=pad_type, norm_type=norm_type, act_type=last_act, mode=mode)
+
+    def forward(self, x):
+        x1 = self.conv1(x)
+        x2 = self.conv2(torch.cat((x, x1), 1))
+        x3 = self.conv3(torch.cat((x, x1, x2), 1))
+        x4 = self.conv4(torch.cat((x, x1, x2, x3), 1))
+        x5 = self.conv5(torch.cat((x, x1, x2, x3, x4), 1))
+        x6 = self.conv6(torch.cat((x, x1, x2, x3, x4, x5), 1))
+        x7 = self.conv7(torch.cat((x, x1, x2, x3, x4, x5, x6), 1))
+        x8 = self.conv8(torch.cat((x, x1, x2, x3, x4, x5, x6, x7), 1))
+        x9 = self.conv9(torch.cat((x, x1, x2, x3, x4, x5, x6, x7, x8), 1))
+        return x9.mul(0.2) + x
+
+
 class ShortcutBlock(nn.Module):
     def __init__(self, submodule):
         super(ShortcutBlock, self).__init__()
