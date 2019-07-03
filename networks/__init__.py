@@ -108,6 +108,12 @@ def define_net(opt):
                                   num_features=opt['num_features'], num_steps=opt['num_steps'], num_groups=opt['num_groups'],
                                   upscale_factor=opt['scale'])
 
+    elif which_model.find('GMFN') >= 0:
+        from .gmfn_arch import GMFN
+        net = GMFN(in_channels=opt['in_channels'], out_channels=opt['out_channels'],
+                               num_features=opt['num_features'],num_steps=opt['num_steps'], num_blocks=opt['num_blocks'],
+                               upscale_factor=opt['scale'])
+
     elif which_model.find('RDN') >= 0:
         from .rdn_arch import RDN
         net = RDN(in_channels=opt['in_channels'], out_channels=opt['out_channels'],
