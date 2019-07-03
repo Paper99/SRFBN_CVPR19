@@ -111,7 +111,8 @@ def define_net(opt):
     elif which_model.find('GMFN') >= 0:
         from .gmfn_arch import GMFN
         net = GMFN(in_channels=opt['in_channels'], out_channels=opt['out_channels'],
-                               num_features=opt['num_features'],num_steps=opt['num_steps'], num_blocks=opt['num_blocks'],
+                               num_features=opt['num_features'], num_steps=opt['num_steps'], num_blocks=opt['num_blocks'],
+                               num_reroute_feats=opt['num_reroute_feats'], num_refine_feats=opt['num_refine_feats'],
                                upscale_factor=opt['scale'])
 
     elif which_model.find('RDN') >= 0:
