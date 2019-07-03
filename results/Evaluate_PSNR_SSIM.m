@@ -4,7 +4,10 @@ clear all; close all; clc
 
 %% set path
 degradation = 'BI'; % BI, BD
+
 methods = {'SRFBN'};
+% methods = {'GMFN'};
+
 dataset = {'Set5'};
 % dataset = {'Set5','Set14','B100','Urban100','Manga109'};
 ext = {'*.jpg', '*.png', '*.bmp'};
