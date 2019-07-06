@@ -256,7 +256,7 @@ class DensebackprojBlock(nn.Module):
 class ResidualDenseBlock_8C(nn.Module):
     '''
     Residual Dense Block
-    style: 5 convs
+    style: 8 convs
     The core module of paper: (Residual Dense Network for Image Super-Resolution, CVPR 18)
     '''
 
