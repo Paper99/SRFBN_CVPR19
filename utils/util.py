@@ -1,4 +1,4 @@
-﻿import os
+import os
 import math
 from datetime import datetime
 import numpy as np
@@ -117,13 +117,13 @@ def calc_metrics(img1, img2, crop_border, test_Y=True):
     else:
         im1_in = img1
         im2_in = img2
-
+    height, width = img1.shape[:2]
     if im1_in.ndim == 3:
-        cropped_im1 = im1_in[crop_border:-crop_border, crop_border:-crop_border, :]
-        cropped_im2 = im2_in[crop_border:-crop_border, crop_border:-crop_border, :]
+        cropped_im1 = im1_in[crop_border:height-crop_border, crop_border:width-crop_border, :]
+        cropped_im2 = im2_in[crop_border:height-crop_border, crop_border:width-crop_border, :]
     elif im1_in.ndim == 2:
-        cropped_im1 = im1_in[crop_border:-crop_border, crop_border:-crop_border]
-        cropped_im2 = im2_in[crop_border:-crop_border, crop_border:-crop_border]
+        cropped_im1 = im1_in[crop_border:height-crop_border, crop_border:width-crop_border]
+        cropped_im2 = im2_in[crop_border:height-crop_border, crop_border:width-crop_border]
     else:
         raise ValueError('Wrong image dimension: {}. Should be 2 or 3.'.format(im1_in.ndim))
 
