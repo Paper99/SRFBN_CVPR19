@@ -9,6 +9,7 @@ import os
 from scipy import misc
 import numpy as np
 import datetime
+import imageio
 from multiprocessing.dummy import Pool as ThreadPool
 
 starttime = datetime.datetime.now()
@@ -55,7 +56,7 @@ def modcrop(image, scale=4):
 
 def main(path):
 	print('Processing-----{}/0800'.format(path.split('/')[-1].split('.')[0]))
-	img = misc.imread(path)
+	img = imageio.imread(path)
 	idx = 0
 	for size in HR_size:
 		save_HR_LR(img, size, path, idx)
