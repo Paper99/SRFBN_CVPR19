@@ -28,7 +28,6 @@ class SRSolver(BaseSolver):
                         'lr': []}
 
         self.model = create_model(opt)
-        self.print_network()
 
         if self.is_train:
             self.model.train()
@@ -68,6 +67,7 @@ class SRSolver(BaseSolver):
                 raise NotImplementedError('Only MultiStepLR scheme is supported!')
 
         self.load()
+        self.print_network()
 
         print('===> Solver Initialized : [%s] || Use CL : [%s] || Use GPU : [%s]'%(self.__class__.__name__,
                                                                                        self.use_cl, self.use_gpu))
@@ -276,9 +276,9 @@ class SRSolver(BaseSolver):
 
         if epoch % self.train_opt['save_ckp_step'] == 0:
             print('===> Saving checkpoint [%d] to [%s] ...]' % (epoch,
-                                                                filename.replace('last_ckp','epoch_%d_ckp.pth'%epoch)))
+                                                                filename.replace('last_ckp','epoch_%d_ckp'%epoch)))
 
-            torch.save(ckp, filename.replace('last_ckp','epoch_%d_ckp.pth'%epoch))
+            torch.save(ckp, filename.replace('last_ckp','epoch_%d_ckp'%epoch))
 
 
     def load(self):
